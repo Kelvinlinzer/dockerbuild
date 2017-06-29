@@ -30,6 +30,7 @@ COPY server.xml /opt/apache-tomcat-8.5.16/conf/server.xml
 RUN cd /opt/apache-tomcat-8.5.16/conf \
     && openssl req -x509 -newkey rsa:4096 -config ssl.cfg -keyout key.pem -out cert.pem -days 365 -nodes
 
-
+ENV LD_LIBRARY_PATH=/opt/apache-tomcat-8.5.16/bin/lib
 EXPOSE 8443
-CMD '/opt/apache-tomcat-8.5.16/bin/startup.sh'
+
+CMD ["/opt/apache-tomcat-8.5.16/bin/catalina.sh", "run"]
